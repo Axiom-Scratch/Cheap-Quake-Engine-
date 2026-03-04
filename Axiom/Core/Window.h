@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Base.h"
+#include "SmartPointer.h"
 
 #include <cstdint>
 #include <string>

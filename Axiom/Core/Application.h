@@ -2,6 +2,7 @@
 
 #include "Base.h"
 #include "Events/EngineEvents.h"
+#include "SmartPointer.h"
 #include "Window.h"
 
 #include <memory>

@@ -26,13 +26,6 @@
 #define AXIOM_DEBUGBREAK()
 #endif
 
-#ifdef AXIOM_DEBUG
-#include <iostream>
-#define AXIOM_ASSERT(x, msg) if (!(x)) { std::cerr << msg << std::endl; AXIOM_DEBUGBREAK(); }
-#else
-#define AXIOM_ASSERT(x, msg)
-#endif
-
 #if defined(AXIOM_COMPILER_MSVC)
 #define AXIOM_FORCE_INLINE __forceinline
 #else
