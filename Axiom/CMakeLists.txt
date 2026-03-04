@@ -1,6 +1,7 @@
 add_library(Axiom STATIC
     Core/Application.cpp
     Core/Input.cpp
+    Core/Log.cpp
     Core/Layers/Layer.cpp
     Core/Layers/LayerStack.cpp
     Core/Platform/GLFW/GLFWWindow.cpp
@@ -15,6 +16,7 @@ target_link_libraries(Axiom
     PUBLIC
         glfw
         EnTT
+        spdlog::spdlog
 )
 
 if (MSVC)

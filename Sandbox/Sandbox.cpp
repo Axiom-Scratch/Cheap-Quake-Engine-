@@ -4,6 +4,7 @@
 #include "Core/Input.h"
 #include "Core/KeyCodes.h"
 #include "Core/Layers/Layer.h"
+#include "Core/Log.h"
 
 #include <iostream>
 
@@ -43,6 +44,9 @@ protected:
     void OnInit() override
     {
         PushLayer(new ExampleLayer());
+
+        AXIOM_CORE_INFO("Engine started");
+        AXIOM_INFO("Sandbox running");
 
         EventBus::Sink<WindowResizeEvent>().connect<&SandboxApp::OnWindowResize>(*this);
         EventBus::Sink<MouseScrolledEvent>().connect<&SandboxApp::OnMouseScrolled>(*this);

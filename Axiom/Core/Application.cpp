@@ -2,6 +2,7 @@
 
 #include "Events/EventBus.h"
 #include "Input.h"
+#include "Log.h"
 
 #include <stdexcept>
 
@@ -13,6 +14,9 @@ Application::Application()
     {
         throw std::runtime_error("Failed to create window");
     }
+
+    Log::Init();
+    AXIOM_CORE_INFO("Axiom Engine Initialized");
 
     EventBus::Sink<WindowCloseEvent>().connect<&Application::OnEvent<WindowCloseEvent>>(*this);
     EventBus::Sink<WindowResizeEvent>().connect<&Application::OnEvent<WindowResizeEvent>>(*this);
