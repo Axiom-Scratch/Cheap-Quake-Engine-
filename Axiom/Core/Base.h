@@ -1,16 +1,7 @@
 #pragma once
 
-#include <iostream>
-
-#if defined(_WIN32) || defined(_WIN64)
-#define AXIOM_PLATFORM_WINDOWS
-#elif defined(__linux__)
-#define AXIOM_PLATFORM_LINUX
-#elif defined(__APPLE__)
-#define AXIOM_PLATFORM_MAC
-#else
-#error Unsupported platform
-#endif
+#include "Compiler.h"
+#include "Platform.h"
 
 #ifdef AXIOM_PLATFORM_WINDOWS
 #ifdef AXIOM_BUILD_DLL
@@ -28,31 +19,24 @@
 
 #if defined(AXIOM_PLATFORM_WINDOWS)
 #define AXIOM_DEBUGBREAK() __debugbreak()
-#elif defined(AXIOM_PLATFORM_LINUX) || defined(AXIOM_PLATFORM_MAC)
-#include <csignal>
+#elif defined(AXIOM_PLATFORM_LINUX)
+#include <signal.h>
 #define AXIOM_DEBUGBREAK() raise(SIGTRAP)
 #else
 #define AXIOM_DEBUGBREAK()
 #endif
 
 #ifdef AXIOM_DEBUG
-#define AXIOM_ASSERT(x, msg) \
-    do                       \
-    {                        \
-        if (!(x))            \
-        {                    \
-            std::cerr << msg << std::endl; \
-            AXIOM_DEBUGBREAK();            \
-        }                    \
-    } while (false)
+#include <iostream>
+#define AXIOM_ASSERT(x, msg) if (!(x)) { std::cerr << msg << std::endl; AXIOM_DEBUGBREAK(); }
 #else
-#define AXIOM_ASSERT(x, msg) do { (void)(x); (void)(msg); } while (false)
+#define AXIOM_ASSERT(x, msg)
 #endif
 
-#define BIT(x) (1u << (x))
-
-#if defined(_MSC_VER)
+#if defined(AXIOM_COMPILER_MSVC)
 #define AXIOM_FORCE_INLINE __forceinline
 #else
 #define AXIOM_FORCE_INLINE inline __attribute__((always_inline))
 #endif
+
+#define BIT(x) (1 << x)
