@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Base.h"
+
 #include <cstdint>
 #include <string>
 #include <utility>

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Core/Base.h"
+
 #include <entt/signal/dispatcher.hpp>
 
 #include <utility>

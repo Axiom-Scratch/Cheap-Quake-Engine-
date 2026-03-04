@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/Base.h"
 #include "Core/KeyCodes.h"
 
 #include <cstdint>
