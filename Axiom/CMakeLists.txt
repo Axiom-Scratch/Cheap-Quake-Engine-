@@ -1,5 +1,6 @@
 add_library(Axiom STATIC
     Core/Application.cpp
+    Core/Input.cpp
     Core/Platform/GLFW/GLFWWindow.cpp
 )
 
@@ -9,7 +10,9 @@ target_include_directories(Axiom
 )
 
 target_link_libraries(Axiom
-    PRIVATE glfw
+    PUBLIC
+        glfw
+        EnTT
 )
 
 if (MSVC)

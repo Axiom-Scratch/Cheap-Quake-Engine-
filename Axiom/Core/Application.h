@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Events/EngineEvents.h"
 #include "Window.h"
 
 #include <memory>
@@ -18,5 +19,8 @@ protected:
     virtual void OnShutdown() {}
 
 private:
+    bool OnWindowClose(const WindowCloseEvent& event);
+
     std::unique_ptr<Window> m_Window;
+    bool m_Running = true;
 };
