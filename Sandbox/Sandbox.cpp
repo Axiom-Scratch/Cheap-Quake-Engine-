@@ -3,14 +3,47 @@
 #include "Core/Events/EventBus.h"
 #include "Core/Input.h"
 #include "Core/KeyCodes.h"
+#include "Core/Layers/Layer.h"
 
 #include <iostream>
+
+class ExampleLayer final : public Layer
+{
+public:
+    ExampleLayer()
+        : Layer("ExampleLayer")
+    {
+    }
+
+    void OnAttach() override
+    {
+        std::cout << "Layer attached\n";
+    }
+
+    void OnUpdate() override
+    {
+        if (Input::IsKeyPressed(KeyCode::W))
+        {
+            std::cout << "W pressed from Layer\n";
+        }
+    }
+
+    void OnEvent(const KeyPressedEvent& event) override
+    {
+        if (event.Key == KeyCode::Escape)
+        {
+            std::cout << "Escape pressed from Layer\n";
+        }
+    }
+};
 
 class SandboxApp final : public Application
 {
 protected:
     void OnInit() override
     {
+        PushLayer(new ExampleLayer());
+
         EventBus::Sink<WindowResizeEvent>().connect<&SandboxApp::OnWindowResize>(*this);
         EventBus::Sink<MouseScrolledEvent>().connect<&SandboxApp::OnMouseScrolled>(*this);
     }

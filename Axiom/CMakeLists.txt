@@ -1,6 +1,8 @@
 add_library(Axiom STATIC
     Core/Application.cpp
     Core/Input.cpp
+    Core/Layers/Layer.cpp
+    Core/Layers/LayerStack.cpp
     Core/Platform/GLFW/GLFWWindow.cpp
 )
 
