@@ -62,10 +62,14 @@ GLFWWindow::GLFWWindow(const WindowProps& props)
     }
 
 
+    const char* vendor = (const char*)glGetString(GL_VENDOR);
+    const char* renderer = (const char*)glGetString(GL_RENDERER);
+    const char* version = (const char*)glGetString(GL_VERSION);
+
     printf("OpenGL Loaded\n");
-    printf("Vendor: %s\n", (const char*)glGetString(GL_VENDOR));
-    printf("Renderer: %s\n", (const char*)glGetString(GL_RENDERER));
-    printf("Version: %s\n", (const char*)glGetString(GL_VERSION));
+    printf("Vendor: %s\n", vendor ? vendor : "Unknown");
+    printf("Renderer: %s\n", renderer ? renderer : "Unknown");
+    printf("Version: %s\n", version ? version : "Unknown");
 
 
     glfwSwapInterval(1);
