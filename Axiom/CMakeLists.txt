@@ -13,10 +13,9 @@ target_include_directories(Axiom
 )
 
 target_link_libraries(Axiom
-    PUBLIC
+    PRIVATE
         glfw
-        EnTT
-        spdlog::spdlog
+        spdlog::spdlog_header_only
 )
 
 if (MSVC)

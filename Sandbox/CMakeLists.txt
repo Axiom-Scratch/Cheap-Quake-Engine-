@@ -1,8 +1,4 @@
-if (WIN32)
-    add_executable(Sandbox WIN32 Sandbox.cpp)
-else()
-    add_executable(Sandbox Sandbox.cpp)
-endif()
+add_executable(Sandbox Sandbox.cpp)
 
 target_link_libraries(Sandbox
     PRIVATE Axiom
