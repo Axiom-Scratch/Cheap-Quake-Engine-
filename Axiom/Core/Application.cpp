@@ -7,6 +7,7 @@
 #include <stdexcept>
 
 #include "Renderer/OpenGL/GLContext.h"
+#include <glad/glad.h>
 
 Application::Application()
     : m_Window(Window::Create())
@@ -39,6 +40,10 @@ void Application::Run()
 
     while (m_Running && !m_Window->ShouldClose())
     {
+
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         m_Window->OnUpdate();
         EventBus::Update();
         for (Layer* layer : m_LayerStack)
