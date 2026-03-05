@@ -3,7 +3,10 @@
 #include "Core/Base.h"
 #include "Core/Window.h"
 
-#include <GLFW/glfw3.h>
+#include <cstdint>
+
+// Forward declaration (avoid heavy include in header)
+struct GLFWwindow;
 
 class GLFWWindow final : public Window
 {
@@ -13,6 +16,7 @@ public:
 
     void OnUpdate() override;
     bool ShouldClose() const override;
+
     std::uint32_t GetWidth() const override;
     std::uint32_t GetHeight() const override;
 

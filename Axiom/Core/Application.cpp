@@ -6,6 +6,8 @@
 
 #include <stdexcept>
 
+#include "Renderer/OpenGL/GLContext.h"
+
 Application::Application()
     : m_Window(Window::Create())
     , m_LayerStack()

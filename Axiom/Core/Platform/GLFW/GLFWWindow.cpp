@@ -1,34 +1,41 @@
 #include "GLFWWindow.h"
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include "Core/Events/EngineEvents.h"
 #include "Core/Events/EventBus.h"
 
 #include <cstdlib>
 #include <mutex>
+#include <iostream>
 
 namespace
 {
-std::once_flag g_GLFWInitFlag;
-bool g_GLFWInitialized = false;
-struct GLFWLifetime
-{
-    ~GLFWLifetime()
+    std::once_flag g_GLFWInitFlag;
+    bool g_GLFWInitialized = false;
+
+    struct GLFWLifetime
     {
-        if (g_GLFWInitialized)
+        ~GLFWLifetime()
         {
-            glfwTerminate();
+            if (g_GLFWInitialized)
+            {
+                glfwTerminate();
+            }
         }
-    }
-};
-GLFWLifetime g_GLFWLifetime;
+    };
+
+    GLFWLifetime g_GLFWLifetime;
 }
 
 GLFWWindow::GLFWWindow(const WindowProps& props)
     : m_Props(props)
 {
-    std::call_once(g_GLFWInitFlag, []() {
-        g_GLFWInitialized = glfwInit() == GLFW_TRUE;
-    });
+    std::call_once(g_GLFWInitFlag, []()
+        {
+            g_GLFWInitialized = glfwInit() == GLFW_TRUE;
+        });
 
     if (!g_GLFWInitialized)
     {
@@ -48,51 +55,70 @@ GLFWWindow::GLFWWindow(const WindowProps& props)
     }
 
     glfwMakeContextCurrent(m_Window);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::abort();
+    }
+
+
+    printf("OpenGL Loaded\n");
+    printf("Vendor: %s\n", (const char*)glGetString(GL_VENDOR));
+    printf("Renderer: %s\n", (const char*)glGetString(GL_RENDERER));
+    printf("Version: %s\n", (const char*)glGetString(GL_VERSION));
+
+
     glfwSwapInterval(1);
 
-    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow*) {
-        EventBus::Trigger(WindowCloseEvent{});
-    });
-
-    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow*, int width, int height) {
-        EventBus::Trigger(WindowResizeEvent{
-            static_cast<uint32_t>(width),
-            static_cast<uint32_t>(height)});
-    });
-
-    glfwSetKeyCallback(m_Window, [](GLFWwindow*, int key, int, int action, int) {
-        if (action == GLFW_PRESS)
+    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow*)
         {
-            EventBus::Trigger(KeyPressedEvent{static_cast<KeyCode>(key), false});
-        }
-        else if (action == GLFW_REPEAT)
-        {
-            EventBus::Trigger(KeyPressedEvent{static_cast<KeyCode>(key), true});
-        }
-        else if (action == GLFW_RELEASE)
-        {
-            EventBus::Trigger(KeyReleasedEvent{static_cast<KeyCode>(key)});
-        }
-    });
+            EventBus::Trigger(WindowCloseEvent{});
+        });
 
-    glfwSetCursorPosCallback(m_Window, [](GLFWwindow*, double x, double y) {
-        EventBus::Trigger(MouseMovedEvent{x, y});
-    });
-
-    glfwSetMouseButtonCallback(m_Window, [](GLFWwindow*, int button, int action, int) {
-        if (action == GLFW_PRESS)
+    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow*, int width, int height)
         {
-            EventBus::Trigger(MouseButtonPressedEvent{static_cast<MouseCode>(button)});
-        }
-        else if (action == GLFW_RELEASE)
-        {
-            EventBus::Trigger(MouseButtonReleasedEvent{static_cast<MouseCode>(button)});
-        }
-    });
+            EventBus::Trigger(WindowResizeEvent{
+                static_cast<uint32_t>(width),
+                static_cast<uint32_t>(height) });
+        });
 
-    glfwSetScrollCallback(m_Window, [](GLFWwindow*, double xoffset, double yoffset) {
-        EventBus::Trigger(MouseScrolledEvent{xoffset, yoffset});
-    });
+    glfwSetKeyCallback(m_Window, [](GLFWwindow*, int key, int, int action, int)
+        {
+            if (action == GLFW_PRESS)
+            {
+                EventBus::Trigger(KeyPressedEvent{ static_cast<KeyCode>(key), false });
+            }
+            else if (action == GLFW_REPEAT)
+            {
+                EventBus::Trigger(KeyPressedEvent{ static_cast<KeyCode>(key), true });
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                EventBus::Trigger(KeyReleasedEvent{ static_cast<KeyCode>(key) });
+            }
+        });
+
+    glfwSetCursorPosCallback(m_Window, [](GLFWwindow*, double x, double y)
+        {
+            EventBus::Trigger(MouseMovedEvent{ x, y });
+        });
+
+    glfwSetMouseButtonCallback(m_Window, [](GLFWwindow*, int button, int action, int)
+        {
+            if (action == GLFW_PRESS)
+            {
+                EventBus::Trigger(MouseButtonPressedEvent{ static_cast<MouseCode>(button) });
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                EventBus::Trigger(MouseButtonReleasedEvent{ static_cast<MouseCode>(button) });
+            }
+        });
+
+    glfwSetScrollCallback(m_Window, [](GLFWwindow*, double xoffset, double yoffset)
+        {
+            EventBus::Trigger(MouseScrolledEvent{ xoffset, yoffset });
+        });
 }
 
 GLFWWindow::~GLFWWindow()

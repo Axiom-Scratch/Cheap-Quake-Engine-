@@ -17,6 +17,7 @@ target_link_libraries(Axiom
     PUBLIC
         glfw
         glad
+        assimp::assimp
         spdlog::spdlog_header_only
 )
 
