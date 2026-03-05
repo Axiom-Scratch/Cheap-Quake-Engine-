@@ -1,10 +1,10 @@
+#include "Core/Log.h"
 #include "Core/Application.h"
 #include "Core/Events/EngineEvents.h"
 #include "Core/Events/EventBus.h"
 #include "Core/Input.h"
 #include "Core/KeyCodes.h"
 #include "Core/Layers/Layer.h"
-#include "Core/Log.h"
 
 #include <iostream>
 

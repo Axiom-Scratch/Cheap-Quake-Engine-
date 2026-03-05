@@ -8,19 +8,19 @@
 class LayerStack
 {
 public:
-    LayerStack();
-    ~LayerStack();
+    AXIOM_API LayerStack();
+    AXIOM_API ~LayerStack();
 
-    void PushLayer(Layer* layer);
-    void PushOverlay(Layer* overlay);
+    AXIOM_API void PushLayer(Layer* layer);
+    AXIOM_API void PushOverlay(Layer* overlay);
 
-    void PopLayer(Layer* layer);
-    void PopOverlay(Layer* overlay);
+    AXIOM_API void PopLayer(Layer* layer);
+    AXIOM_API void PopOverlay(Layer* overlay);
 
-    std::vector<Layer*>::iterator begin();
-    std::vector<Layer*>::iterator end();
-    std::vector<Layer*>::const_iterator begin() const;
-    std::vector<Layer*>::const_iterator end() const;
+    AXIOM_API std::vector<Layer*>::iterator begin();
+    AXIOM_API std::vector<Layer*>::iterator end();
+    AXIOM_API std::vector<Layer*>::const_iterator begin() const;
+    AXIOM_API std::vector<Layer*>::const_iterator end() const;
 
 private:
     std::vector<Layer*> m_Layers;

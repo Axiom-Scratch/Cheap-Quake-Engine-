@@ -7,7 +7,7 @@
 class Layer
 {
 public:
-    explicit Layer(std::string name = "Layer");
+    AXIOM_API explicit Layer(std::string name = "Layer");
     virtual ~Layer() = default;
 
     virtual void OnAttach() {}

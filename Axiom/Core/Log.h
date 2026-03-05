@@ -13,10 +13,10 @@
 class Log
 {
 public:
-    static void Init();
+    AXIOM_API static void Init();
 
-    static std::shared_ptr<spdlog::logger>& GetCoreLogger();
-    static std::shared_ptr<spdlog::logger>& GetClientLogger();
+    AXIOM_API static std::shared_ptr<spdlog::logger>& GetCoreLogger();
+    AXIOM_API static std::shared_ptr<spdlog::logger>& GetClientLogger();
 
 private:
     static std::shared_ptr<spdlog::logger> s_CoreLogger;

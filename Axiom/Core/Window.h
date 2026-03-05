@@ -22,7 +22,7 @@ struct WindowProps
     }
 };
 
-class Window
+class AXIOM_API Window
 {
 public:
     virtual ~Window() = default;

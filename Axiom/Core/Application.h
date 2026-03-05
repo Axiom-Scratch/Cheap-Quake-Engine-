@@ -11,12 +11,12 @@
 class Application
 {
 public:
-    Application();
+    AXIOM_API Application();
     virtual ~Application() = default;
 
-    void Run();
-    void PushLayer(Layer* layer);
-    void PushOverlay(Layer* layer);
+    AXIOM_API void Run();
+    AXIOM_API void PushLayer(Layer* layer);
+    AXIOM_API void PushOverlay(Layer* layer);
 
 protected:
     virtual void OnInit() {}

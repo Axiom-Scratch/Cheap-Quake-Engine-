@@ -1,8 +1,8 @@
+#include "Log.h"
 #include "Application.h"
 
 #include "Events/EventBus.h"
 #include "Input.h"
-#include "Log.h"
 
 #include <stdexcept>
 

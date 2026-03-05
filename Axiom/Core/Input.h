@@ -6,15 +6,15 @@
 class Input
 {
 public:
-    static bool IsKeyPressed(KeyCode key);
-    static bool IsKeyReleased(KeyCode key);
-    static bool IsKeyDown(KeyCode key);
+    AXIOM_API static bool IsKeyPressed(KeyCode key);
+    AXIOM_API static bool IsKeyReleased(KeyCode key);
+    AXIOM_API static bool IsKeyDown(KeyCode key);
 
-    static bool IsMouseButtonPressed(MouseCode button);
+    AXIOM_API static bool IsMouseButtonPressed(MouseCode button);
 
-    static float GetMouseX();
-    static float GetMouseY();
-    static void EndFrame();
+    AXIOM_API static float GetMouseX();
+    AXIOM_API static float GetMouseY();
+    AXIOM_API static void EndFrame();
 
 private:
     friend struct InputRegistration;

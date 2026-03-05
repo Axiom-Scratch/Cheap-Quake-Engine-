@@ -5,44 +5,44 @@
 
 #include <cstdint>
 
-struct WindowCloseEvent
+struct AXIOM_API WindowCloseEvent
 {
 };
 
-struct WindowResizeEvent
+struct AXIOM_API WindowResizeEvent
 {
     uint32_t Width;
     uint32_t Height;
 };
 
-struct KeyPressedEvent
+struct AXIOM_API KeyPressedEvent
 {
     KeyCode Key;
     bool Repeat;
 };
 
-struct KeyReleasedEvent
+struct AXIOM_API KeyReleasedEvent
 {
     KeyCode Key;
 };
 
-struct MouseMovedEvent
+struct AXIOM_API MouseMovedEvent
 {
     double X;
     double Y;
 };
 
-struct MouseButtonPressedEvent
+struct AXIOM_API MouseButtonPressedEvent
 {
     MouseCode Button;
 };
 
-struct MouseButtonReleasedEvent
+struct AXIOM_API MouseButtonReleasedEvent
 {
     MouseCode Button;
 };
 
-struct MouseScrolledEvent
+struct AXIOM_API MouseScrolledEvent
 {
     double XOffset;
     double YOffset;

@@ -1,4 +1,4 @@
-add_library(Axiom STATIC
+add_library(Axiom SHARED
     Core/Application.cpp
     Core/Input.cpp
     Core/Log.cpp
@@ -10,12 +10,18 @@ add_library(Axiom STATIC
 target_include_directories(Axiom
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/external/entt/src
 )
 
 target_link_libraries(Axiom
-    PRIVATE
+    PUBLIC
         glfw
         spdlog::spdlog_header_only
+)
+
+target_compile_definitions(Axiom
+    PRIVATE
+        AXIOM_BUILD_DLL
 )
 
 if (MSVC)

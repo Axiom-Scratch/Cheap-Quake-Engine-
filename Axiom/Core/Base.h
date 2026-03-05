@@ -1,5 +1,21 @@
 #pragma once
 
+#ifdef AXIOM_PLATFORM_WINDOWS
+
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
+#ifdef APIENTRY
+#undef APIENTRY
+#endif
+
+#endif
+
 #include "Compiler.h"
 #include "Platform.h"
 
