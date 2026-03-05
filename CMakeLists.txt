@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(AxiomEngine LANGUAGES CXX)
+project(AxiomEngine LANGUAGES C CXX)
 
 set(CMAKE_VS_GLOBAL_EnableBuildInsights OFF CACHE BOOL "" FORCE)
 set(CMAKE_VS_GLOBAL_EnableCodeAnalysis OFF CACHE BOOL "" FORCE)
@@ -15,6 +15,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(external/glfw)
+add_subdirectory(external/glad)
 add_subdirectory(external/spdlog)
 add_subdirectory(Axiom)
 add_subdirectory(Sandbox)
